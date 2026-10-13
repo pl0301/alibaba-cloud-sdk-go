@@ -240,6 +240,12 @@ func init() {
 	json.Unmarshal([]byte(apiTimeouts), &timeout)
 }
 
+// GetAPIMaxTimeout returns the existing per-API SDK read timeout, if configured.
+// The general SDK default is not an API table entry.
+func GetAPIMaxTimeout(product, actionName string) (time.Duration, bool) {
+	return getAPIMaxTimeout(product, actionName)
+}
+
 func getAPIMaxTimeout(product, actionName string) (time.Duration, bool) {
 	if timeout == nil {
 		return 0 * time.Millisecond, false
